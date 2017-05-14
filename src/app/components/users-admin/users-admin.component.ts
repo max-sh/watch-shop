@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataApiService } from '../../services/data-api.service';
 
 @Component({
   selector: 'app-users-admin',
@@ -7,9 +8,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UsersAdminComponent implements OnInit {
 
-  constructor() { }
+  users: any;
+
+  constructor(private api:DataApiService) { }
 
   ngOnInit() {
+    this.getUsers();
+    
   }
 
+  getUsers() {
+    this.api.getUsers().subscribe(users => {
+      this.users = users;
+    },
+    err => {
+      console.log(err);
+      return false;
+    });
+  }
 }

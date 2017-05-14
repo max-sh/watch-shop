@@ -1,18 +1,19 @@
 <app-navbar-user></app-navbar-user>
+
 <div class="container">
   <div class="container-fluid">
       <h1>ALL WATCHES</h1>
   </div>
-
-  <div class="container-fluid">
-    <div class="row content">
-      <div class="col-sm-3 sidenav">
-        <h2>CATEGORIES</h2>
-        <div class="list-group">
-          <li class="list-group-item" *ngFor="let category of categories">
-            <a [routerLink]="['/category/'+category.id]"> {{ category.categoryName }} </a>
-          </li>
-        </div>
+    <div class="container-fluid">
+      <div class="row content">
+        <div class="col-sm-3 sidenav">
+          <h2>CATEGORIES</h2>
+          <div class="list-group">
+            <li [routerLinkActive]="['active']" class="list-group-item" *ngFor="let category of categories">
+              <a [routerLink]="['/category/'+category.id]" > {{ category.categoryName }} </a>
+              <!--<a (click)="redirect(category.id)"> {{ category.categoryName }} </a>-->
+            </li>
+          </div>
       </div>
       <div class="col-sm-9">
         <div class="row">

@@ -18,15 +18,28 @@ import { RegisterComponent } from './components/register/register.component';
 
 import { AuthService } from './services/auth.service';
 import { DataApiService } from './services/data-api.service';
+import { FooterComponent } from './components/footer/footer.component';
+import { CategoryEditComponent } from './components/category-edit/category-edit.component';
+import { CategoryNewComponent } from './components/category-new/category-new.component';
+import { ItemEditComponent } from './components/item-edit/item-edit.component';
+import { ItemNewComponent } from './components/item-new/item-new.component';
+import { ItemsAdminComponent } from './components/items-admin/items-admin.component';
+import { CategoryComponent } from './components/category/category.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'catalog', component: CatalogComponent },
+  { path: 'category/:id', component: CategoryComponent },
   { path: 'item/:id', component: ItemComponent },
 
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'admin', component: HomeAdminComponent }
+  { path: 'admin', component: HomeAdminComponent },
+  { path: 'admin/categories', component: CategoriesAdminComponent },
+  { path: 'admin/category/:id', component: CategoryEditComponent },
+  { path: 'admin/items', component: ItemsAdminComponent },
+  { path: 'admin/item/:id', component: ItemEditComponent },
+  { path: 'admin/users', component: UsersAdminComponent }
 ];
 
 @NgModule({
@@ -41,7 +54,14 @@ const appRoutes: Routes = [
     CategoriesAdminComponent,
     UsersAdminComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    FooterComponent,
+    CategoryEditComponent,
+    CategoryNewComponent,
+    ItemEditComponent,
+    ItemNewComponent,
+    ItemsAdminComponent,
+    CategoryComponent
   ],
   imports: [
     BrowserModule,

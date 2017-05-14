@@ -1,3 +1,27 @@
-<p>
-  login works!
-</p>
+<app-navbar-user></app-navbar-user>
+
+<div class="container">
+  <header id="header">
+    <h1 class="text-center">Login</h1>
+  </header>
+  <section id="main">
+    <div class="row">
+      <div class="col-md-4 col-md-offset-4">
+        <form class="well" id="login" (submit)="onLoginSubmit()">
+          <div class="form-group">
+            <label>Email Address</label>
+            <input class="form-control" type="email" placeholder="Enter Email" [(ngModel)]="email" name="email">
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input class="form-control" type="password" placeholder="Enter Password" [(ngModel)]="password" name="password">
+          </div>
+          <button class="btn btn-default btn-block" type="submit">Login</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</div>
+
+
+

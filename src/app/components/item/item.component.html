@@ -1,3 +1,31 @@
-<p>
-  item works!
-</p>
+<app-navbar-user></app-navbar-user>
+
+<div class="container">
+  <h1>ALL MENS WATCHES</h1>
+  <div class="row">
+    <div class="col-md-6"><img class="img-responsive" src="{{item?.image_url}}"></div>
+    <div class="col-md-6">
+      <h1>{{ item?.name }}</h1>
+      <h2>{{ item?.manufacturer }}</h2>
+      <hr>
+      <div *ngIf="item?.available == 1; else preorder">
+        <h3>{{ item?.price }}  ₴</h3>
+        <a class="btn_order" href="#">ORDER</a>
+      </div>
+      <ng-template #preorder >
+        <h3><s>{{ item?.price }}</s>  ₴ <small>Out of stock</small></h3>
+        <a class="btn_order" href="#">PRE-ORDER</a>
+      </ng-template>
+      <hr>
+    </div>
+  </div>
+  <hr>
+  <h1>PRODUCT DETAILS</h1>
+  <div class="row">
+    <div class="col-md-6" [innerHTML]="item?.description"></div>
+  </div>
+
+  <hr>
+</div>
+
+<app-footer></app-footer>
