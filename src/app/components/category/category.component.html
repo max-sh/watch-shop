@@ -23,7 +23,7 @@
               <div class="product-info">
                 <p class="text-center">{{ item.name }}</p>
                 <p class="text-center">{{ item.manufacturer }}</p>
-                <p class="text-center">£{{ item.price }} </p>
+                <p class="text-center">{{ item.price }}  ₴</p>
                 <div *ngIf="item?.available == 1; else preorder">
                   <a class="mybtn" [routerLink]="['/item/'+item.id]" >Shop Now</a>
                 </div>

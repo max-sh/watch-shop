@@ -1,0 +1,25 @@
+<app-navbar-admin></app-navbar-admin>
+
+<div class="container">
+  <form>
+    <div class="form-group">
+      <label>User name</label>
+      <input id="userName" type="text" class="form-control" placeholder="User name" value="{{user?.user_name}}">
+    </div>
+    <div class="form-group">
+      <label>Email</label>
+      <input id="email" type="text" class="form-control" placeholder="User email" value="{{user?.email}}">
+    </div>
+    <select class="form-control" [(ngModel)]="role" name="role">
+      <option value="user" [selected]="user?.role =='user'">user</option>
+      <option value="admin" [selected]="user?.role =='admin'">admin</option>
+      <!--<option value="user">user</option>
+      <option value="admin">admin</option>-->
+    </select>
+    <!--<div class="form-group">
+      <label>Category description</label>
+      <textarea id="categoryDescription" name="editor1" class="form-control" placeholder="Page Body"></textarea>
+    </div>-->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" (click)="editUser()" >Edit</button>
+  </form>
+</div>

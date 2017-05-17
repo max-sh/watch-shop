@@ -19,9 +19,10 @@
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
+        <li *ngIf="!authService.loggedIn()"><a [routerLink]="['/register']" >Register</a></li>
         <li *ngIf="!authService.loggedIn(); else logout"><a [routerLink]="['/login']" >Login</a></li>
         <ng-template #logout>
-          <li><a (click)="logOut()">Logout</a></li>
+          <li><a [routerLink]="['/']" (click)="logOut()">Logout</a></li>
         </ng-template>
         <li *ngIf="authService.getRole() == 'admin'"><a [routerLink]="['/admin']" >Admin Panel</a></li>
       </ul>

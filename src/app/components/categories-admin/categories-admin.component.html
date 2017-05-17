@@ -33,7 +33,7 @@
             <ng-template #elseBlock><td><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></td></ng-template>
             <td>
               <a class="btn btn-default" [routerLink]="['/admin/category/'+category.id]" >Edit</a> 
-              <a class="btn btn-danger" href="#">Delete</a>
+              <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal" (click)="toDelete = category.id">Delete</button>
             </td>
           </tr>
         </table>
@@ -41,3 +41,22 @@
     </div>
   </div>
 </section>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Info</h4>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete the category?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">NO</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="delete()">YES</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -7,9 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ItemEditComponent implements OnInit {
 
+  CKEDITOR_BASEPATH = '/assets/js/ckeditor';
+
   constructor() { }
 
   ngOnInit() {
+    window['CKEDITOR']['replace']( 'editor1' );
   }
 
 }

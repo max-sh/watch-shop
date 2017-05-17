@@ -18,6 +18,8 @@ import { RegisterComponent } from './components/register/register.component';
 
 import { AuthService } from './services/auth.service';
 import { DataApiService } from './services/data-api.service';
+import { ValidationService } from './services/validation.service';
+
 import { FooterComponent } from './components/footer/footer.component';
 import { CategoryEditComponent } from './components/category-edit/category-edit.component';
 import { CategoryNewComponent } from './components/category-new/category-new.component';
@@ -25,6 +27,8 @@ import { ItemEditComponent } from './components/item-edit/item-edit.component';
 import { ItemNewComponent } from './components/item-new/item-new.component';
 import { ItemsAdminComponent } from './components/items-admin/items-admin.component';
 import { CategoryComponent } from './components/category/category.component';
+import { UserEditComponent } from './components/user-edit/user-edit.component';
+import { UserNewComponent } from './components/user-new/user-new.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -35,11 +39,18 @@ const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'admin', component: HomeAdminComponent },
+
   { path: 'admin/categories', component: CategoriesAdminComponent },
   { path: 'admin/category/:id', component: CategoryEditComponent },
+  { path: 'admin/category/new', component: CategoryNewComponent },
+
   { path: 'admin/items', component: ItemsAdminComponent },
   { path: 'admin/item/:id', component: ItemEditComponent },
-  { path: 'admin/users', component: UsersAdminComponent }
+  { path: 'admin/item/new', component: ItemNewComponent },
+
+  { path: 'admin/users', component: UsersAdminComponent },
+  { path: 'admin/user/:id', component: UserEditComponent },
+  { path: 'admin/user/new', component: UserNewComponent }
 ];
 
 @NgModule({
@@ -61,7 +72,9 @@ const appRoutes: Routes = [
     ItemEditComponent,
     ItemNewComponent,
     ItemsAdminComponent,
-    CategoryComponent
+    CategoryComponent,
+    UserEditComponent,
+    UserNewComponent
   ],
   imports: [
     BrowserModule,
@@ -69,7 +82,7 @@ const appRoutes: Routes = [
     HttpModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [AuthService, DataApiService],
+  providers: [AuthService, DataApiService, ValidationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
