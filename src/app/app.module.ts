@@ -29,6 +29,7 @@ import { ItemsAdminComponent } from './components/items-admin/items-admin.compon
 import { CategoryComponent } from './components/category/category.component';
 import { UserEditComponent } from './components/user-edit/user-edit.component';
 import { UserNewComponent } from './components/user-new/user-new.component';
+import { SearchComponent } from './components/search/search.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -42,15 +43,16 @@ const appRoutes: Routes = [
 
   { path: 'admin/categories', component: CategoriesAdminComponent },
   { path: 'admin/category/:id', component: CategoryEditComponent },
-  { path: 'admin/category/new', component: CategoryNewComponent },
+  { path: 'admin/category-new', component: CategoryNewComponent },
 
   { path: 'admin/items', component: ItemsAdminComponent },
   { path: 'admin/item/:id', component: ItemEditComponent },
-  { path: 'admin/item/new', component: ItemNewComponent },
+  { path: 'admin/item-new', component: ItemNewComponent },
 
   { path: 'admin/users', component: UsersAdminComponent },
   { path: 'admin/user/:id', component: UserEditComponent },
-  { path: 'admin/user/new', component: UserNewComponent }
+  { path: 'admin/user/new', component: UserNewComponent },
+  { path: 'search', component: SearchComponent }
 ];
 
 @NgModule({
@@ -74,7 +76,8 @@ const appRoutes: Routes = [
     ItemsAdminComponent,
     CategoryComponent,
     UserEditComponent,
-    UserNewComponent
+    UserNewComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

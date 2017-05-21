@@ -1,3 +1,82 @@
-<p>
-  item-new works!
-</p>
+<app-navbar-admin></app-navbar-admin>
+<div class="container">
+  
+  <form #f="ngForm">
+    <div class="alert alert-danger alert-dismissible" role="alert" [hidden]="!err">
+      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <strong>Error!</strong> {{errMsg}}
+    </div>
+    <div class="form-group">
+      <label>Product name</label>
+      <input type="text" class="form-control" placeholder="Product name" [(ngModel)]="name" name="prodname">
+    </div>
+
+    <div class="form-group">
+      <label>Manufacturer</label>
+      <input type="text" class="form-control" placeholder="Manufacturer" [(ngModel)]="manufacturer" name="manufacturer">
+    </div>
+
+    <div class="form-group">
+      <label>Price</label>
+      <input type="text" class="form-control" placeholder="Price" [(ngModel)]="price" name="price">
+    </div>
+
+    <div class="form-group">
+      <label>Description</label>
+      <textarea rows="10" class="form-control" placeholder="Description" [(ngModel)]="description" name="description"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Image url</label>
+      <textarea rows="2" class="form-control" placeholder="Description" [(ngModel)]="img" name="img"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Category</label>
+      <!--<select [(ngModel)]="category" name="cat" id="cat">       
+        <option *ngFor="let c of categories"
+                [value]="c.id">
+          {{ c.categoryName }}
+        </option>
+      </select>-->
+
+      <select [(ngModel)]="category" name="cat" id="cat">       
+        <option *ngFor="let c of categories; let i = index" 
+                [value]="i">
+          {{ c.categoryName }}
+        </option>
+      </select>
+
+      <!--<ul *ngFor="#item of items; #i = index" [attr.data-index]="i">
+    <li>{{item}}</li>
+</ul>-->
+    </div>
+
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" [(ngModel)]="available" name="available"> Available
+      </label>
+    </div>
+    <button class="btn btn-default" type="button" (click)='validateAndAdd()'>Add</button>
+    <button id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#myModal">Open Modal</button>
+  </form>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Info</h4>
+      </div>
+      <div class="modal-body">
+        {{ result }}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -46,7 +46,7 @@ export class CategoryEditComponent implements OnInit {
     
   }
 
-  validateCategory() {
+  validateAndEditCategory() {
     this.err = false;
     let res = this.validation.validateCategory(this.name, this.description);
     if(res.length != 0) {

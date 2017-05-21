@@ -12,6 +12,7 @@ export class CategoriesAdminComponent implements OnInit {
 
   categories: any;
   toDelete: number;
+  message: string;
 
   constructor(
     private router: Router,
@@ -32,13 +33,28 @@ export class CategoriesAdminComponent implements OnInit {
   }
 
   delete() {
-    this.api.deleteCategory(this.toDelete).subscribe(data => {
-      console.log(data);
-      this.getCategories();
+    this.api.getItemsByCategory(this.toDelete).subscribe(data => {
+      if(data.length != 0) {
+        this.message = "This category has products. Can't be deleted"
+        document.getElementById("openModalButton").click();
+      }
+      else {
+        this.api.deleteCategory(this.toDelete).subscribe(data => {
+              console.log(data);
+              this.getCategories();
+            },
+            err => {
+              console.log(err);
+              return false;
+            });
+      }
     },
     err => {
       console.log(err);
       return false;
     });
+
+
+    
   }
 }

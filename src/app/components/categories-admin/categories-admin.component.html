@@ -9,11 +9,8 @@
       </div>
       <div class="panel-body">
         <div class="row">
-          <div class="col-md-11">
-              <input class="form-control" type="text" placeholder="Filter Categories...">
-          </div>
-          <div class="col-md-1">
-              <a class="btn btn-success" href="#">New</a>
+          <div class="col-md-1 col-xs-1">
+              <a class="btn btn-success" [routerLink]="['/admin/category-new']">New</a>
           </div>
         </div>
         <br>
@@ -56,6 +53,26 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">NO</button>
         <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="delete()">YES</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<button id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#messageModal">Open Modal</button>
+<!-- Modal -->
+<div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Info</h4>
+      </div>
+      <div class="modal-body">
+        {{ message }}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>

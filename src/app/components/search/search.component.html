@@ -1,0 +1,30 @@
+<app-navbar-user></app-navbar-user>
+
+<div class="container">
+  <form class="form-inline" #f="ngForm">
+    <input type="text" class="form-control" id="name" placeholder="Item name" [(ngModel)]="name" name="name">
+    <button type="button" class="btn btn-default" (click)="find()">Find</button>
+  </form>
+  <br>
+  <table class="table table-striped">
+    <tr>
+      <th>Item name</th>
+      <th>Manufacturer</th>
+      <th>Price</th>
+      <th>Available</th>
+      <th>Link</th>
+    </tr>
+    <tr *ngFor="let item of items">
+      <td>{{ item.name }}</td>
+      <td>{{ item.manufacturer }}</td>
+      <td>{{ item.price }}</td>
+      <td *ngIf="item.available == 1; else elseBlock"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></td>
+      <ng-template #elseBlock><td><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></td></ng-template>
+        
+      <td>
+        <a class="btn btn-default" [routerLink]="['/item/'+item.id]" >View</a> 
+      </td>
+    </tr>
+
+  </table>
+</div>

@@ -9,6 +9,7 @@ import { DataApiService } from '../../services/data-api.service';
 export class ItemsAdminComponent implements OnInit {
 
   items: any;
+  toDelete: number;
 
   constructor(private api:DataApiService) { }
 
@@ -18,6 +19,16 @@ export class ItemsAdminComponent implements OnInit {
   getItems() {
     this.api.getItems().subscribe(items => {
       this.items = items;
+    },
+    err => {
+      console.log(err);
+      return false;
+    });
+  }
+  delete() {
+    this.api.deleteItem(this.toDelete).subscribe(data => {
+      console.log(data);
+      this.getItems();
     },
     err => {
       console.log(err);

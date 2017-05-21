@@ -11,6 +11,8 @@ export class LoginComponent implements OnInit {
 
   email: String;
   password: String;
+  errMsg: string;
+  err: boolean;
 
   constructor(
     private authService: AuthService,
@@ -21,6 +23,7 @@ export class LoginComponent implements OnInit {
   }
 
   onLoginSubmit() {
+    this.err = false;
     if(this.email == null || this.password == null) {
       console.log('permission denied');
     }
@@ -38,11 +41,13 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/']);
         }
         else {
-          console.log('permission denied');
+          this.errMsg = 'Permission denied';
+          this.err = true;
         }
       },
       err => {
-        console.log(err);
+        this.errMsg = 'Incorrect data';
+        this.err = true;
         return false;
       });
     }

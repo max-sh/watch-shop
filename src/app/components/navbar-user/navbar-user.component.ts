@@ -9,12 +9,15 @@ import { Router } from '@angular/router';
 })
 export class NavbarUserComponent implements OnInit {
 
+  email: string;
+
   constructor(
     private authService: AuthService,
     private router: Router) { }
 
   ngOnInit() {
     this.authService.loadUserData();
+    this.email = this.authService.getEmail();
   }
 
   logOut() {

@@ -9,16 +9,19 @@
         <div class="col-sm-3 sidenav">
           <h2>CATEGORIES</h2>
           <div class="list-group">
-            <li [routerLinkActive]="['active']" class="list-group-item" *ngFor="let category of categories">
-              <a [routerLink]="['/category/'+category.id]" > {{ category.categoryName }} </a>
-              <!--<a (click)="redirect(category.id)"> {{ category.categoryName }} </a>-->
-            </li>
+            <ul>
+              <div *ngFor="let category of categories">
+                <li *ngIf="category.id != 1" class="list-group-item">
+                  <a [routerLink]="['/category/'+category.id]"> {{ category.categoryName }} </a>
+                </li>
+              </div>
+            </ul>
           </div>
       </div>
       <div class="col-sm-9">
         <div class="row">
           <div class="col-md-4 col-xs-6" *ngFor="let item of items" >
-            <div class="product">
+            <div class="product" *ngIf="item.category != 1">
               <img class="img-responsive" src="{{item.image_url}}">
               <div class="product-info">
                 <p class="text-center">{{ item.name }}</p>

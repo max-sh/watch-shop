@@ -6,6 +6,7 @@ import { Observable}  from 'rxjs/Observable';
 @Injectable()
 export class DataApiService {
 
+  url: string = 'http://localhost:8090/dashboard/api/api.php';
   constructor(private http: Http) { }
 
   getCategories() {
@@ -13,20 +14,7 @@ export class DataApiService {
     var headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
-    // this.http
-    //   .post('http://localhost:8090/dashboard/api/api.php',
-    //     body, {
-    //       headers: headers
-    //     })
-    //     .subscribe(data => {
-    //           //alert('ok');
-    //           console.log(data);
-    //     }, error => {
-    //         console.log(JSON.stringify(error.json()));
-    //     });
-    
-    // console.log(this.http.post('http://localhost:8090/dashboard/api/api.php', body, {headers: headers}).map((res:Response) => res.json()));
-    let categories = this.http.post('http://localhost:8090/dashboard/api/api.php', body, {headers: headers}).map(res => res.json());
+    let categories = this.http.post(this.url, body, {headers: headers}).map(res => res.json());
 
     return categories as Observable<Category[]>;
   }
@@ -35,7 +23,7 @@ export class DataApiService {
     var body = 'table=categories&method=getById&id=' + id;
     var headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
-    let items = this.http.post('http://localhost:8090/dashboard/api/api.php', body, {headers: headers}).map(res => res.json());
+    let items = this.http.post(this.url, body, {headers: headers}).map(res => res.json());
     return items as Observable<Category>;
   }
 
@@ -44,7 +32,15 @@ export class DataApiService {
     console.log(body);
     var headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
-    return this.http.post('http://localhost:8090/dashboard/api/api.php', body, {headers: headers});
+    return this.http.post(this.url, body, {headers: headers});
+  }
+
+  addCategory(category: Category) {
+    var body = 'table=categories&method=create&name=' + category.categoryName + '&description=' + category.description + '&visible=' + category.visible;
+    console.log(body);
+    var headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    return this.http.post(this.url, body, {headers: headers});
   }
   
   deleteCategory(id: number) {
@@ -52,14 +48,22 @@ export class DataApiService {
     console.log(body);
     var headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
-    return this.http.post('http://localhost:8090/dashboard/api/api.php', body, {headers: headers});
+    return this.http.post(this.url, body, {headers: headers});
   }
 
   getItems() {
     var body = 'table=products&method=get';
     var headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
-    let items = this.http.post('http://localhost:8090/dashboard/api/api.php', body, {headers: headers}).map(res => res.json());
+    let items = this.http.post(this.url, body, {headers: headers}).map(res => res.json());
+    return items as Observable<Item[]>;
+  }
+
+  findItems(name) {
+    var body = 'table=products&method=find&name=' + name;
+    var headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    let items = this.http.post(this.url, body, {headers: headers}).map(res => res.json());
     return items as Observable<Item[]>;
   }
 
@@ -67,23 +71,64 @@ export class DataApiService {
     var body = 'table=products&method=getById&id=' + id;
     var headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
-    let items = this.http.post('http://localhost:8090/dashboard/api/api.php', body, {headers: headers}).map(res => res.json());
-    return items as Observable<Item[]>;
+    let items = this.http.post(this.url, body, {headers: headers}).map(res => res.json());
+    return items;
   }
 
   getItemsByCategory(id) {
     var body = 'table=products&method=getByCategory&id=' + id;
     var headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
-    let items = this.http.post('http://localhost:8090/dashboard/api/api.php', body, {headers: headers}).map(res => res.json());
+    let items = this.http.post(this.url, body, {headers: headers}).map(res => res.json());
     return items as Observable<Item[]>;
+  }
+
+  editItem(item: Item) {
+    var body = 'table=products&method=edit' + 
+    '&id=' + item.id + 
+    '&name=' + item.name + 
+    '&manufacturer=' + item.manufacturer +
+    '&description=' + item.description + 
+    '&available=' + item.available +
+    '&price=' + item.price + 
+    '&image=' + item.image_url + 
+    '&category=' + item.category;
+
+    console.log(body);
+    var headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    return this.http.post(this.url, body, {headers: headers});
+  }
+
+  addItem(item: Item) {
+    var body = 'table=products&method=create' + 
+    '&name=' + item.name + 
+    '&manufacturer=' + item.manufacturer +
+    '&description=' + item.description + 
+    '&available=' + item.available +
+    '&price=' + item.price + 
+    '&image=' + item.image_url + 
+    '&category=' + item.category;
+
+    console.log(body);
+    var headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    return this.http.post(this.url, body, {headers: headers});
+  }
+
+  deleteItem(id: number) {
+    var body = 'table=products&method=delete&id=' + id;
+    console.log(body);
+    var headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    return this.http.post(this.url, body, {headers: headers});
   }
 
   getUsers() {
     var body = 'table=users&method=get';
     var headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
-    let users = this.http.post('http://localhost:8090/dashboard/api/api.php', body, {headers: headers}).map(res => res.json());
+    let users = this.http.post(this.url, body, {headers: headers}).map(res => res.json());
     return users as Observable<User[]>;
   }
 
@@ -91,8 +136,25 @@ export class DataApiService {
     var body = 'table=users&method=getById&id=' + id;
     var headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
-    let users = this.http.post('http://localhost:8090/dashboard/api/api.php', body, {headers: headers}).map(res => res.json());
+    let users = this.http.post(this.url, body, {headers: headers}).map(res => res.json());
     return users as Observable<User>;
+  }
+
+  checkEmail(email: string) {
+    var body = 'table=users&method=checkEmail&email=' + email;
+    var headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    let res = this.http.post(this.url, body, {headers: headers}).map(res => res.json());
+    return res;
+  }
+
+  registerUser(user) {
+    var body = 'table=users&method=create&email=' + user.email + '&pass=' + user.password;
+    console.log(body);
+    var headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    let res = this.http.post(this.url, body, {headers: headers}).map(res => res.json());
+    return res;
   }
 }
 export interface Category {
@@ -103,13 +165,13 @@ export interface Category {
 }
 export interface Item {
   id? : number,
-  name? : String,
-  manufacturer : String,
-  description : String,
-  price : String,
-  category : String,
+  name? : string,
+  manufacturer : string,
+  description : string,
+  price : number,
+  category : string,
   available: boolean,
-  image_url: String
+  image_url: string
 }
 export interface User {
   id?: number,

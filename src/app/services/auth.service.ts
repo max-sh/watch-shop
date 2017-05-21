@@ -11,10 +11,6 @@ export class AuthService {
 
   constructor(private http: Http) { }
 
-  registerUser(user){
-
-  }
-
   authenticateUser(user){
     var body = 'table=users&method=auth&email=' + user.email + '&pass=' + user.password;
     var headers = new Headers();
@@ -30,8 +26,8 @@ export class AuthService {
     return this.role;
   }
 
-  getProfile(){
-
+  getEmail(): string {
+    return localStorage.getItem('email');
   }
 
   loadUserData(): void {
@@ -49,10 +45,6 @@ export class AuthService {
     this.user = null;
     this.logedIn = false;
     localStorage.clear();
-  }
-
-  loadToken(){
-
   }
 
   setLogedIn(logedIn: boolean): void {

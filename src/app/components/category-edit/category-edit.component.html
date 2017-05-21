@@ -19,7 +19,7 @@
         <input type="checkbox" [(ngModel)]="visible" name="visible"> Visible
       </label>
     </div>
-    <button class="btn btn-default" type="button" (click)='validateCategory()'>Edit</button>
+    <button class="btn btn-default" type="button" (click)='validateAndEditCategory()'>Edit</button>
     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#yesnomodal">Delete</button>
     <button id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#myModal">Open Modal</button>
   </form>

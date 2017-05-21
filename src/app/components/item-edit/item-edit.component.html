@@ -1,56 +1,91 @@
 <app-navbar-admin></app-navbar-admin>
 <div class="container">
   
-  <div class="alert alert-warning alert-dismissible" role="alert">
-    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-    <strong>Warning!</strong> Better check yourself, you're not looking too good.
-  </div>
-  
-  <div class="alert alert-success alert-dismissible" role="alert">
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-     Success</div>
-  <form>
-
+  <form #f="ngForm">
+    <div class="alert alert-danger alert-dismissible" role="alert" [hidden]="!err">
+      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <strong>Error!</strong> {{errMsg}}
+    </div>
     <div class="form-group">
       <label>Product name</label>
-      <input type="text" class="form-control" placeholder="Product name" value="Product name">
+      <input type="text" class="form-control" placeholder="Product name" [(ngModel)]="name" name="prodname">
     </div>
 
     <div class="form-group">
       <label>Manufacturer</label>
-      <input type="text" class="form-control" placeholder="Manufacturer" value="Manufacturer">
+      <input type="text" class="form-control" placeholder="Manufacturer" [(ngModel)]="manufacturer" name="manufacturer">
     </div>
 
     <div class="form-group">
       <label>Price</label>
-      <input type="text" class="form-control" placeholder="Price" value="Price">
+      <input type="text" class="form-control" placeholder="Price" [(ngModel)]="price" name="price">
     </div>
 
     <div class="form-group">
       <label>Description</label>
-      <textarea name="editor1" class="form-control" placeholder="Description">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-      </textarea>
+      <textarea rows="10" class="form-control" placeholder="Description" [(ngModel)]="description" name="description"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Image url</label>
+      <textarea rows="2" class="form-control" placeholder="Description" [(ngModel)]="img" name="img"></textarea>
     </div>
 
     <div class="form-group">
       <label>Category</label>
-      <select class="form-control">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
+      <select [(ngModel)]="category" name="cat">       
+        <option *ngFor="let c of categories"
+                [value]="c.id">
+          {{ c.categoryName }}
+        </option>
       </select>
     </div>
 
     <div class="checkbox">
       <label>
-        <input type="checkbox" checked> Available
+        <input type="checkbox" [(ngModel)]="available" name="available"> Available
       </label>
     </div>
-    <input type="submit" class="btn btn-default" value="Submit">
+    <button class="btn btn-default" type="button" (click)='validateAndEdit()'>Edit</button>
+    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#yesnomodal">Delete</button>
+    <button id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#myModal">Open Modal</button>
   </form>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Info</h4>
+      </div>
+      <div class="modal-body">
+        {{ result }}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- yes/no Modal -->
+<div class="modal fade" id="yesnomodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Info</h4>
+      </div>
+      <div class="modal-body">
+        Are you sure?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">NO</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="delete()">YES</button>
+      </div>
+    </div>
+  </div>
 </div>
